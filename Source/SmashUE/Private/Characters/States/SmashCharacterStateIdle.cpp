@@ -3,6 +3,8 @@
 
 #include "Characters/States/SmashCharacterStateIdle.h"
 
+#include "SmashCharacter.h"
+
 
 ESmashCharacterStateID USmashCharacterStateIdle::GetStateID()
 {
@@ -12,6 +14,8 @@ ESmashCharacterStateID USmashCharacterStateIdle::GetStateID()
 void USmashCharacterStateIdle::StateEnter(ESmashCharacterStateID PreviousStateID)
 {
 	Super::StateEnter(PreviousStateID);
+
+	Character->PlayAnimMontage(IdleAnimation);
 
 	GEngine->AddOnScreenDebugMessage(
 		-1,
@@ -30,5 +34,17 @@ void USmashCharacterStateIdle::StateExit(ESmashCharacterStateID NextStateID)
 		3.f,
 		FColor::Red,
 		TEXT("Exit StateIdle")
+		);
+}
+
+void USmashCharacterStateIdle::StateTick(float DeltaTime)
+{
+	Super::StateTick(DeltaTime);
+
+	GEngine->AddOnScreenDebugMessage(
+		-1,
+		.1f,
+		FColor::Cyan,
+		TEXT("Tick StateIdle")
 		);
 }

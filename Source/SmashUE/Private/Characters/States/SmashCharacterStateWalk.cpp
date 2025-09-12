@@ -3,6 +3,8 @@
 
 #include "Characters/States/SmashCharacterStateWalk.h"
 
+#include "SmashCharacter.h"
+
 
 ESmashCharacterStateID USmashCharacterStateWalk::GetStateID()
 {
@@ -13,6 +15,9 @@ void USmashCharacterStateWalk::StateEnter(ESmashCharacterStateID PreviousStateID
 {
 	Super::StateEnter(PreviousStateID);
 
+	Character->PlayAnimMontage(WalkAnimation);
+	
+	
 	GEngine->AddOnScreenDebugMessage(
 		-1,
 		3.f,
@@ -30,6 +35,20 @@ void USmashCharacterStateWalk::StateExit(ESmashCharacterStateID NextStateID)
 		3.f,
 		FColor::Red,
 		TEXT("Exit StateWalk")
+		);
+}
+
+void USmashCharacterStateWalk::StateTick(float DeltaTime)
+{
+	Super::StateTick(DeltaTime);
+
+	Character->AddMovementInput(Character->GetActorForwardVector(), WalkSpeed);
+
+	GEngine->AddOnScreenDebugMessage(
+		-1,
+		.1f,
+		FColor::Green,
+		TEXT("Tick StateWalk")
 		);
 }
 
