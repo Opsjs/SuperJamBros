@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Characters/SmashCharacterSettings.h"
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
+
 
 class USmashCharacterStateMachine;
 UCLASS()
@@ -59,5 +61,18 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<USmashCharacterStateMachine> StateMachine;
 
-#pragma endregion 	
+#pragma endregion
+
+#pragma region InputData / MappingContext
+
+public:
+	UPROPERTY()
+	TObjectPtr<UInputMappingContext> InputMappingContext;
+
+	UPROPERTY()
+	TObjectPtr<USmashCharacterInputData> InputData;
+
+protected:
+	void SetupMappingContextIntoController() const;
+#pragma endregion
 };
