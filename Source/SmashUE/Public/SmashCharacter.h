@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Characters/SmashCharacterSettings.h"
+
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
 
@@ -74,5 +75,28 @@ public:
 
 protected:
 	void SetupMappingContextIntoController() const;
+#pragma endregion
+
+#pragma region Input Move X
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInputMoveXEvent, float, InputMoveX);
+	
+public:
+	float GetInputMoveX() const;
+
+	UPROPERTY()
+	FInputMoveXEvent InputMoveXFastEvent;
+
+protected:
+	UPROPERTY()
+	float InputMoveX = 0.f;
+
+private:
+	void BindInputMoveXAxisAndActions(UEnhancedInputComponent* EnhancedInputComponent);
+	
+	void OnInputMoveX(const FInputActionValue& InputActionValue);
+
+	void OnInputMoveXFast(const FInputActionValue& InputActionValue);
+	
 #pragma endregion
 };

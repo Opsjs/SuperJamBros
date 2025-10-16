@@ -27,7 +27,8 @@ public:
 	virtual void StateExit(ESmashCharacterStateID NextStateID);
 
 	virtual void StateTick(float DeltaTime);
-	
+
+	virtual float GetInputMoveXThreshold();
 protected:
 	UPROPERTY()
 	TObjectPtr<ASmashCharacter> Character;
